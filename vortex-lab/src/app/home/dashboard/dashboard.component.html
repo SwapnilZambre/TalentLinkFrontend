@@ -1,0 +1,58 @@
+<section class="space-y-6">
+  <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+    <div>
+      <h1 class="text-2xl sm:text-3xl font-semibold">Welcome, {{ userName() }} 👋</h1>
+      <p class="text-slate-600">Here are your quick stats and shortcuts.</p>
+    </div>
+    <div class="flex gap-2">
+      <a routerLink="/jobs/post" class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-brand-600 text-white hover:bg-brand-700">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        Post Job
+      </a>
+      <a routerLink="/candidates" class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-slate-300 hover:bg-slate-100">Browse Candidates</a>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="rounded-xl bg-white shadow p-5">
+      <p class="text-sm text-slate-600">Jobs Posted</p>
+      <p class="mt-1 text-3xl font-semibold">{{ jobsCount() }}</p>
+    </div>
+    <div class="rounded-xl bg-white shadow p-5">
+      <p class="text-sm text-slate-600">Candidates Available</p>
+      <p class="mt-1 text-3xl font-semibold">{{ candidatesCount() }}</p>
+    </div>
+    <div class="rounded-xl bg-white shadow p-5">
+      <p class="text-sm text-slate-600">Matches Today</p>
+      <p class="mt-1 text-3xl font-semibold">{{ minCount() }}</p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="rounded-xl bg-white shadow p-5">
+      <h2 class="text-lg font-semibold mb-3">Recent Jobs</h2>
+      <div class="divide-y">
+        <a *ngFor="let j of data.jobs()" [routerLink]="['/jobs', j.id]" class="block py-3 group">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="font-medium group-hover:text-brand-600">{{ j.title }}</p>
+              <p class="text-sm text-slate-600">{{ j.location }} • {{ j.skills.slice(0,3).join(', ') }}</p>
+            </div>
+            <span class="text-sm font-medium">${{ j.salary | number }}</span>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="rounded-xl bg-white shadow p-5">
+      <h2 class="text-lg font-semibold mb-3">Top Candidates</h2>
+      <div class="divide-y">
+        <a *ngFor="let c of data.candidates()" [routerLink]="['/candidates', c.id]" class="block py-3 group">
+          <div>
+            <p class="font-medium group-hover:text-brand-600">{{ c.name }}</p>
+            <p class="text-sm text-slate-600">{{ c.location }} • {{ c.skills.slice(0,3).join(', ') }}</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

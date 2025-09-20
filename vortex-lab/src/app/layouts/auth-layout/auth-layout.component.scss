@@ -1,0 +1,17 @@
+.bgimg{
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    width: 100%;
+}
+.maindiv{
+    margin-left: -14%;
+}
+@media screen and (max-width: 768px) {
+    .bg-img{
+        display: none;
+    }
+    .maindiv{
+        margin-left: 0;
+    }
+}

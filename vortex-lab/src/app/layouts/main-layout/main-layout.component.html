@@ -1,0 +1,54 @@
+<div class="min-h-screen bg-slate-50 text-slate-800">
+  <!-- Top Navbar -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <button class="lg:hidden p-2 rounded-md hover:bg-slate-100" (click)="toggleMobile()" aria-label="Open Menu">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <a routerLink="/home" class="flex items-center gap-2 font-semibold text-slate-900">
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded bg-brand-600 text-white font-bold">T</span>
+          <span class="text-lg">TalentLink</span>
+        </a>
+      </div>
+      <nav class="hidden lg:flex items-center gap-6 text-sm">
+        <a routerLink="/jobs" routerLinkActive="text-brand-600" class="hover:text-brand-600">Jobs</a>
+        <a routerLink="/candidates" routerLinkActive="text-brand-600" class="hover:text-brand-600">Candidates</a>
+        <a routerLink="/profile" routerLinkActive="text-brand-600" class="hover:text-brand-600">Profile</a>
+        <button (click)="logout()" class="px-3 py-1.5 rounded-md bg-slate-900 text-white hover:bg-slate-700">Logout</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="lg:hidden" *ngIf="mobileOpen()">
+    <div class="fixed inset-0 z-40" (click)="toggleMobile()">
+      <div class="absolute inset-0 bg-black/40"></div>
+    </div>
+    <aside class="fixed inset-y-0 left-0 z-50 w-72 bg-white shadow-xl p-6 space-y-4">
+      <a routerLink="/home" (click)="toggleMobile()" class="block text-lg font-semibold">Home</a>
+      <a routerLink="/jobs" (click)="toggleMobile()" class="block">Jobs</a>
+      <a routerLink="/jobs/post" (click)="toggleMobile()" class="block">Post Job</a>
+      <a routerLink="/candidates" (click)="toggleMobile()" class="block">Candidates</a>
+      <a routerLink="/profile" (click)="toggleMobile()" class="block">Profile</a>
+      <button (click)="logout(); toggleMobile()" class="mt-4 w-full px-3 py-2 rounded-md bg-slate-900 text-white hover:bg-slate-700">Logout</button>
+    </aside>
+  </div>
+
+  <!-- Main Content with desktop sidebar -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 grid grid-cols-1 lg:grid-cols-[16rem_1fr] gap-6">
+    <aside class="hidden lg:block">
+      <div class="sticky top-20 space-y-2">
+        <a routerLink="/home" routerLinkActive="bg-slate-100 text-slate-900" class="block px-3 py-2 rounded-md text-slate-700 hover:bg-slate-100">Dashboard</a>
+        <a routerLink="/jobs" routerLinkActive="bg-slate-100 text-slate-900" class="block px-3 py-2 rounded-md text-slate-700 hover:bg-slate-100">Jobs</a>
+        <a routerLink="/jobs/post" routerLinkActive="bg-slate-100 text-slate-900" class="block px-3 py-2 rounded-md text-slate-700 hover:bg-slate-100">Post Job</a>
+        <a routerLink="/candidates" routerLinkActive="bg-slate-100 text-slate-900" class="block px-3 py-2 rounded-md text-slate-700 hover:bg-slate-100">Candidates</a>
+        <a routerLink="/profile" routerLinkActive="bg-slate-100 text-slate-900" class="block px-3 py-2 rounded-md text-slate-700 hover:bg-slate-100">Profile</a>
+      </div>
+    </aside>
+
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<section class="space-y-4">
+  <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+    <h1 class="text-2xl font-semibold">Candidates</h1>
+    <div class="flex-1"></div>
+    <input type="text" placeholder="Search candidates..." class="w-full sm:w-72 rounded-md border-slate-300 focus:border-brand-600 focus:ring-brand-600" [ngModel]="query()" (ngModelChange)="query.set($event)" />
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+    <a *ngFor="let c of filtered()" [routerLink]="['/candidates', c.id]" class="block rounded-xl bg-white shadow hover:shadow-lg transition p-5">
+      <div>
+        <h3 class="text-lg font-semibold">{{ c.name }}</h3>
+        <p class="text-sm text-slate-600">{{ c.location }} • {{ c.experienceYears }} yrs</p>
+      </div>
+      <div class="mt-3 flex flex-wrap gap-2">
+        <span *ngFor="let s of c.skills" class="px-2 py-0.5 text-xs rounded-full bg-slate-100 text-slate-700">{{ s }}</span>
+      </div>
+    </a>
+  </div>
+</section>
