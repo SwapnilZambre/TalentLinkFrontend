@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../../shared/services/data.service';
 
@@ -24,11 +24,21 @@ export class PostJobComponent {
     experienceMax: [3, [Validators.required, Validators.min(0)]],
     location: ['', [Validators.required]],
     salary: [80000, [Validators.required, Validators.min(0)]],
-  });
+    companyName:['', [Validators.required]],
+  }, { validators: this.minMaxValidator } );
 
   get f(){ return this.form.controls; }
   submitting = false;
   message = '';
+  private minMaxValidator(control: AbstractControl): ValidationErrors | null {
+    const min = control.get('experienceMin')?.value;
+    const max = control.get('experienceMax')?.value;
+
+    if (min != null && max != null && max < min) {
+      return { maxLessThanMin: true };
+    }
+    return null;
+  }
 
   submit() {
     if (this.form.invalid) { this.form.markAllAsTouched(); return; }

@@ -6,6 +6,10 @@
       <input type="text" formControlName="title" class="w-full rounded-md border-slate-300 focus:border-brand-600 focus:ring-brand-600" />
     </div>
     <div class="lg:col-span-2">
+      <label class="block text-sm font-medium mb-1">Company Name</label>
+      <input type="text" formControlName="companyName" class="w-full rounded-md border-slate-300 focus:border-brand-600 focus:ring-brand-600" />
+    </div>
+    <div class="lg:col-span-2">
       <label class="block text-sm font-medium mb-1">Description</label>
       <textarea rows="5" formControlName="description" class="w-full rounded-md border-slate-300 focus:border-brand-600 focus:ring-brand-600"></textarea>
     </div>
@@ -16,13 +20,50 @@
     <div class="grid grid-cols-2 gap-3">
       <div>
         <label class="block text-sm font-medium mb-1">Experience Min (years)</label>
+        <input
+          type="number"
+          formControlName="experienceMin"
+          class="w-full rounded-md border-slate-300 focus:border-brand-600 focus:ring-brand-600"
+        />
+        <div *ngIf="f.experienceMin?.hasError('min') && f.experienceMin?.touched" class="text-red-500 text-sm">
+          Minimum experience must be greater than 0
+        </div>
+        <div *ngIf="f.experienceMin?.hasError('required') && f.experienceMin?.touched" class="text-red-500 text-sm">
+          Minimum experience is required
+        </div>
+      </div>
+    
+      <div>
+        <label class="block text-sm font-medium mb-1">Experience Max (years)</label>
+        <input
+          type="number"
+          formControlName="experienceMax"
+          class="w-full rounded-md border-slate-300 focus:border-brand-600 focus:ring-brand-600"
+        />
+        <div *ngIf="f.experienceMax?.hasError('min') && f.experienceMax?.touched" class="text-red-500 text-sm">
+          Maximum experience must be greater than 0
+        </div>
+        <div *ngIf="f.experienceMax?.hasError('required') && f.experienceMax?.touched" class="text-red-500 text-sm">
+          Maximum experience is required
+        </div>
+      </div>
+      <div *ngIf="form.hasError('maxLessThanMin') && form.touched" class="text-red-500 text-sm mt-2">
+        Max experience cannot be less than Min experience
+      </div>
+    </div>
+    
+    
+    
+    <!-- <div class="grid grid-cols-2 gap-3">
+      <div>
+        <label class="block text-sm font-medium mb-1">Experience Min (years)</label>
         <input type="number" formControlName="experienceMin" class="w-full rounded-md border-slate-300 focus:border-brand-600 focus:ring-brand-600" />
       </div>
       <div>
         <label class="block text-sm font-medium mb-1">Experience Max (years)</label>
         <input type="number" formControlName="experienceMax" class="w-full rounded-md border-slate-300 focus:border-brand-600 focus:ring-brand-600" />
       </div>
-    </div>
+    </div> -->
     <div>
       <label class="block text-sm font-medium mb-1">Location</label>
       <input type="text" formControlName="location" class="w-full rounded-md border-slate-300 focus:border-brand-600 focus:ring-brand-600" />
